@@ -1,14 +1,14 @@
-function View(config) {
+function GenericSnippet(config) {
 	this.config = config;
 	this.container = this.config.container;
 }
 
-View.prototype.constructor = View;
+GenericSnippet.prototype.constructor = GenericSnippet;
 
-View.prototype.initialize = function() {
+GenericSnippet.prototype.initialize = function() {
 	var snippet = new Snippet( { path : this.pathSnippet , data : (this.data != undefined) ? this.data : [] } );
 	this.node = $.parseHTML(snippet.getSnippet());
 	this.container.append(this.node);
 }
 
-View.prototype.addHandlers = function(){ }
+GenericSnippet.prototype.addHandlers = function() {}
