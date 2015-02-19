@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" type="text/css" href="../../src/ui/list-gallery/css/listGallery.css" />
+	<style>
+	body {
+		position: relative;
+	}
+	ul {
+		list-style: none;
+	}
+
+	li {
+		float: left;
+	}
+
+	select {
+		float: left;
+	}
+
+	select,input {
+		height: 30px;
+	}
+
+	#container {
+		width: 60%;
+		height: 300px;
+		overflow: hidden;
+		background-color: yellow;
+		float: left;
+		margin-top: 20px;
+		border: solid 1px #000;
+	}
+
+	.btn {
+		list-style: none;
+		padding: 10px;
+		background-color: #d5d5d5;
+		display: inline-block;
+		float: left;
+		margin: 0 10px;
+		cursor: pointer;
+	}
+
+	.overlay {
+		position: absolute;
+		display: inline-block;
+		width: 100%;
+		height: 100%;
+		color:rgba(255,255,255,0.8);
+		top: 0;
+		left: 0;
+	}
+	</style>
+	<script type="text/javascript" src="../../src/3rdparty/jquery/src/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="../../src/core/oop.js"></script>
+	<script type="text/javascript" src="../../src/core/Snippet.js"></script>
+	<script type="text/javascript" src="../../src/ui/list-gallery/code/ListGallery.js"></script>
+	<script type="text/javascript" src="../../src/ui/list-gallery/code/ItemList.js"></script>
+	<script type="text/javascript" src="../../src/ui/list-gallery/code/ItemPicture.js"></script>
+	<script type="text/javascript" src="../../src/ui/list-gallery/code/ItemShortDescription.js"></script>
+	<script type="text/javascript" src="../../src/ui/list-gallery/code/ItemLargeDescription.js"></script>
+	
+	<script type="text/javascript">
+		$(window).load(function(){
+			var data = [{ id:0, type:1, title:"", value:"13,48%", image : "images/firefox.jpg" },
+						{ id:1, type:1, title:"", value:"31,34%", image : "images/chrome.jpg" },
+						{ id:2, type:1, title:"", value:"16,48%", image : "images/safari.jpg" },
+						{ id:3, type:1, title:"", value:"13,10%", image : "images/iexplorer.jpg" },				
+						{ id:4, type:1, title:"", value:"0,02%", image : "images/opera.jpg" },						
+						{ id:5, type:2, title:"Others", value:"25,49%", image : "" },
+						{ id:5, type:3, title:"11,63%", value:"Of users are on mobile devices", image : "" }];
+
+			this.listGallery = new ListGallery( { container:$("#container") });
+			this.listGallery.initialize();
+
+			$("#input-items").change( { context:this}, function(e){
+				e.data.context.listGallery.addItems($(this).val());
+			});
+
+			$(".btn-add-multiple-items").click(function(){
+				listGallery.addItemsByNumber($("#input-items").val());
+			});
+
+			$(".btn-add-item").click(function(){
+				listGallery.addNewItemByType({ type:$('select option').filter(':selected').data("value"),data:{} });
+			});
+
+			$(".btn-remove-items").click(function(){
+				listGallery.removeAll();
+			});
+
+			$(".btn-remove-last-item").click(function(){
+				listGallery.removeItem();
+			});
+
+			$(".btn-add-item-by-data-source").click(function(){
+				listGallery.addItems(data);
+			});
+		});
+	</script>
+
+	
+</head>
+<body>
+	<nav style="float:left;width:100%;">
+		<ul>
+			<li>
+				<div class="btn btn-add-multiple-items">Add multiple items</div>
+			</li>
+			<li>
+				<input id="input-items" type="number" />
+			</li>
+			<li>
+				<div class="btn btn-remove-items">Remove all</div>
+			</li>
+			<li>
+				<div class="btn btn-add-item">Add item</div>
+				<select>
+					<option data-value="1">Default</option>
+					<option data-value="2">Imagen</option>
+					<option data-value="3">Texto</option>
+				</select>
+			</li>
+			<li>
+				<div class="btn btn-remove-last-item">Remove last item</div>
+			</li>	
+			<li>
+				<div class="btn btn-add-item-by-data-source">Add items by data source</div>
+			</li>			
+		</ul>
+	</nav>
+	<div id="container"></div>
+</body>
+</html>

@@ -5,6 +5,8 @@ function View(config) {
 
 View.prototype.constructor = View;
 
+View.prototype.initializeParameters = function() {}
+
 View.prototype.initialize = function() {
 	var snippet = new Snippet( { path : this.pathSnippet , data : (this.data != undefined) ? this.data : [] } );
 	this.node = $.parseHTML(snippet.getSnippet());

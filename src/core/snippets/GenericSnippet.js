@@ -5,8 +5,10 @@ function GenericSnippet(config) {
 
 GenericSnippet.prototype.constructor = GenericSnippet;
 
+GenericSnippet.prototype.initializeParameters = function() {}
+
 GenericSnippet.prototype.initialize = function() {
-	var snippet = new Snippet( { path : this.pathSnippet , data : (this.data != undefined) ? this.data : [] } );
+	var snippet = new Snippet( { path : this.pathSnippet , data : (this.dataSnippet != undefined) ? this.dataSnippet : [] } );
 	this.node = $.parseHTML(snippet.getSnippet());
 	this.container.append(this.node);
 }

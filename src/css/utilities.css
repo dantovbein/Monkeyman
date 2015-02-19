@@ -1,0 +1,56 @@
+/* Start Popup */
+.popup {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	margin: auto;
+}
+/* End Popup */
+
+/* Start Overlay */
+.overlay {
+	top: 0;
+	left: 0;
+	display: inline-block;
+	background-color: rgba(0,0,0,.4);
+	position: absolute;
+}
+/* End Overlay */
+
+/* Start Preloader */
+.preloader {
+	position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 180px;
+    height: 180px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 11px rgba(0,0,0,.5);
+    background-color: rgba(255,255,255,1);
+}
+
+.preloader .preloader-icon {
+	width: 75px;
+	height: 75px;
+	background-image: url("../images/preloader.gif");
+	display: inline-block;
+	left: 0;
+	right: 0;
+	top: 28px;
+	position: absolute;
+	margin: auto;
+}
+
+.preloader .preloader-text {
+	position: absolute;
+    color: rgba(0,0,0,.7);
+    left: 0;
+    right: 0;
+    bottom: 20px;
+    font-size: 14pt;
+    text-align: center;
+    font-family: "Arial";	
+}
+/* End Preloader */

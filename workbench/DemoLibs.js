@@ -1,6 +1,7 @@
-function DemoLibs(_lib_) {
+function Libs(_lib_,onSuccess) {
 	var self = this;
 	this.lib = _lib_;
+	this.onSuccess = onSuccess;
 	
 	if(window.jQuery == undefined) {
 		console.log("Jquery is not loaded. It's mandatory to load JQuery");
@@ -9,16 +10,14 @@ function DemoLibs(_lib_) {
 	}
 };
 
-DemoLibs.prototype.constructor = DemoLibs;
+Libs.prototype.constructor = Libs;
 
-DemoLibs.prototype.getFiles = function(_lib_) {
+Libs.prototype.getFiles = function(_lib_) {
 	var self = this;
 	this.libraries = new Array(
 		{
-			"name"	: "demo",
-			"libs"	: [
-				"code/3rdparty/___.js"
-			]
+			"name"	: "",
+			"libs"	: [ ]
 		}
 	);
 	var _libs_ = new Array();
@@ -29,8 +28,9 @@ DemoLibs.prototype.getFiles = function(_lib_) {
 	return _libs_;
 };
 
-DemoLibs.prototype.loadFiles = function(files) {
+Libs.prototype.loadFiles = function(files) {
 	var index,extension,file;
+	this.filesLoaded = 0;
 	files.forEach(function(f){
 		index = f.lastIndexOf(".",f.length);
 		extension = f.slice(index + 1,f.length);
@@ -38,9 +38,11 @@ DemoLibs.prototype.loadFiles = function(files) {
 		{
 			case "css":
 				$.ajax({
+					context : this,
 					async : false,
 					url : f,
 					success : function(result) {
+						this.filesLoaded++;
 						$("<style></style>").appendTo("head").html(result);
 					},
 					error : function(error) {
@@ -50,10 +52,12 @@ DemoLibs.prototype.loadFiles = function(files) {
 			break;
 			case "js":
 				$.ajax({
+					context : this,
 					async : false,
 					url : f,
 					dataType : "script",
 					success : function(result) {
+						this.filesLoaded++;
 						console.log("Se cargo: " + f);
 					},
 					error : function(error) {
@@ -63,5 +67,12 @@ DemoLibs.prototype.loadFiles = function(files) {
 
 			break;
 		}
-	});
+	},this);
+	
+	if(this.filesLoaded==files.length){
+		console.log("Se cargaron todos los archivos!");
+		this.onSuccess();
+	}else{
+		alert("Hay archivos que no se cargaron")
+	}
 };
