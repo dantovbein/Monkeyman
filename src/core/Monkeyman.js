@@ -1,5 +1,5 @@
 var Monkeyman = {
-	version : "1.0.0",
+	version : "1.0.11",
 	setMain : function(main){
 		this.main = main;
 	},
