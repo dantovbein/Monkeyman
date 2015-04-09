@@ -1,5 +1,5 @@
 var Monkeyman = {
-	version : "1.0.11",
+	version : "1.0.13",
 	setMain : function(main){
 		this.main = main;
 	},
@@ -24,6 +24,24 @@ var Monkeyman = {
 	addZero : function(value) {
 		return (value < 10) ? "0" + parseFloat(value) : parseFloat(value);
 	},
+	getMonths : function(){
+		return [ { es: [ "Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"] } ];
+	},
+	getMonthId : function(month,type){
+		var arrType = [];
+		switch(type){
+			case "es": 
+				arrType = this.getMonths()[0].es; 
+			break;
+		}
+		var id = -1;
+		arrType.forEach(function(m,i){
+			if(m.toLocaleLowerCase() == month.toLocaleLowerCase()){
+				id = i;
+			}
+		});
+		return id;
+	},
 	defaultTo : function(value,defaultTo) {
 		return (value) ? value : defaultTo;
 	},
@@ -42,7 +60,7 @@ var Monkeyman = {
 			height : tempHeight
 		})
 	},
-	startLoading : function(message) {
+	isLoading : function(message) {
 		this.getOverlay();
 		this.getPreloader(message);
 	},
@@ -94,9 +112,17 @@ var Monkeyman = {
 			return false;
 		}
 	},
+	removePopup : function(e) {
+		this.removeOverlay();
+		if($(".popup").length > 0) {
+			$(".popup").remove();
+		}
+	},
 	highlightButton : function(element,context,className){
 		var child;
+		debugger;
 		for(var i=0; i<context.children().length; i++){
+			debugger;
 			child = context.children()[i];
 			
 			if($(child).hasClass(className)){
