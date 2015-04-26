@@ -120,9 +120,7 @@ var Monkeyman = {
 	},
 	highlightButton : function(element,context,className){
 		var child;
-		debugger;
 		for(var i=0; i<context.children().length; i++){
-			debugger;
 			child = context.children()[i];
 			
 			if($(child).hasClass(className)){

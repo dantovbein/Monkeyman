@@ -9,6 +9,8 @@ GenericView.prototype.constructor = GenericView;
 
 GenericView.prototype.initializeParameters = function() {
 	this.container = this.config.container;
+	this._name = (this.config.name) ? this.config.name : "";
+	this.path = (this.config.path) ? this.config.path : "";
 }
 
 GenericView.prototype.initialize = function() {
