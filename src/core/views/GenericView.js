@@ -14,7 +14,7 @@ GenericView.prototype.initializeParameters = function() {
 }
 
 GenericView.prototype.initialize = function() {
-	var snippet = new Snippet( { path : this.path , data : (this.data != undefined) ? this.data : [] } );
+	var snippet = new Snippet( { path : this.path , data : (this.dataSnippet != undefined) ? this.dataSnippet : [] } );
 	this.node = $.parseHTML(snippet.getSnippet());
 	this.container.append(this.node);
 }
