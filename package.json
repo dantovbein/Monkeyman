@@ -1,0 +1,28 @@
+{
+  "name": "MonkeymanJS",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "empty"
+  },
+  "author": "Dan Tovbein",
+  "license": "ISC",
+  "dependencies": {
+    "browserify": "^12.0.1",
+    "gulp": "^3.9.0",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-copy": "0.0.2",
+    "gulp-rename": "^1.2.2",
+    "uglify": "^0.1.5",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "devDependencies": {
+    "gulp-folders": "^1.1.0"
+  }
+}
