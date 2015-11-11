@@ -1,4 +1,16 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+// package ui
+var Slider = require('./ui/slider/src/Slider.js');
+var SliderWithThumbnails = require('./ui/slider/src/SliderWithThumbnails.js');
+var ItemSlider = require('./ui/slider/src/ItemSlider.js');
+var Preloader = require('./ui/preloader/src/Preloader.js');
+var ItemList = require('./ui/list-gallery/src/ItemList.js');
+var ItemPicture = require('./ui/list-gallery/src/ItemPicture.js');
+var ItemShortDescription = require('./ui/list-gallery/src/ItemShortDescription.js');
+var ItemLargeDescription = require('./ui/list-gallery/src/ItemLargeDescription.js');
+var ListGallery = require('./ui/list-gallery/src/ListGallery.js');
+var Toggle = require('./ui/toggle/src/Toggle.js');
+},{"./ui/list-gallery/src/ItemLargeDescription.js":2,"./ui/list-gallery/src/ItemList.js":3,"./ui/list-gallery/src/ItemPicture.js":4,"./ui/list-gallery/src/ItemShortDescription.js":5,"./ui/list-gallery/src/ListGallery.js":6,"./ui/preloader/src/Preloader.js":7,"./ui/slider/src/ItemSlider.js":8,"./ui/slider/src/Slider.js":9,"./ui/slider/src/SliderWithThumbnails.js":10,"./ui/toggle/src/Toggle.js":11}],2:[function(require,module,exports){
 function ItemLargeDescription(config){
 	ItemList.call(this,config);
 	this.pathSnippet = (this.config.pathSnippet) ? this.config.pathSnippet : "../../src/ui/list-gallery/snippets/item-large-description.html";
@@ -18,7 +30,7 @@ ItemLargeDescription.prototype.updateSize = function() {
 		height : this.tempWrapperDataHeight
 	});
 }
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 function ItemList(config){
 	this.config = config;
 	this.container = this.config.container;
@@ -46,7 +58,7 @@ ItemList.prototype.updateSize = function() {
 ItemList.prototype.destroy = function() {
 	$(this.node).remove()
 }
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 function ItemPicture(config){
 	ItemList.call(this,config);
 	this.pathSnippet = (this.config.pathSnippet) ? this.config.pathSnippet : "../../src/ui/list-gallery/snippets/item-picture.html";
@@ -55,7 +67,7 @@ function ItemPicture(config){
 inheritPrototype(ItemPicture,ItemList);
 
 ItemPicture.prototype.constructor = ItemPicture;
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 function ItemShortDescription(config){
 	ItemList.call(this,config);
 	this.pathSnippet = (this.config.pathSnippet) ? this.config.pathSnippet : "../../src/ui/list-gallery/snippets/item-short-description.html";
@@ -75,7 +87,7 @@ ItemShortDescription.prototype.updateSize = function() {
 		height : this.tempWrapperDataHeight
 	});
 }
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 function ListGallery(config) {
 	this.config = config;
 	this.container = this.config.container;
@@ -287,19 +299,7 @@ ListGallery.prototype.getAvailableSpace = function() {
 
 
 
-},{}],6:[function(require,module,exports){
-// package ui
-var Slider = require('./slider/src/Slider.js');
-var SliderWithThumbnails = require('./slider/src/SliderWithThumbnails.js');
-var ItemSlider = require('./slider/src/ItemSlider.js');
-var Preloader = require('./preloader/src/Preloader.js');
-var ItemList = require('./list-gallery/src/ItemList.js');
-var ItemPicture = require('./list-gallery/src/ItemPicture.js');
-var ItemShortDescription = require('./list-gallery/src/ItemShortDescription.js');
-var ItemLargeDescription = require('./list-gallery/src/ItemLargeDescription.js');
-var ListGallery = require('./list-gallery/src/ListGallery.js');
-var Toggle = require('./toggle/src/Toggle.js');
-},{"./list-gallery/src/ItemLargeDescription.js":1,"./list-gallery/src/ItemList.js":2,"./list-gallery/src/ItemPicture.js":3,"./list-gallery/src/ItemShortDescription.js":4,"./list-gallery/src/ListGallery.js":5,"./preloader/src/Preloader.js":7,"./slider/src/ItemSlider.js":8,"./slider/src/Slider.js":9,"./slider/src/SliderWithThumbnails.js":10,"./toggle/src/Toggle.js":11}],7:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 function Preloader(config) {
 	this.config = config;
 	this.container = this.config.container;
@@ -541,4 +541,4 @@ Toggle.prototype.showState = function() {
 	$(this.node).removeClass(removeClassName);
 	$(this.node).addClass(addClassName);
 }
-},{}]},{},[6]);
+},{}]},{},[1]);

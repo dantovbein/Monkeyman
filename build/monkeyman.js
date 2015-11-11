@@ -1,4 +1,3 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var Monkeyman = {
 	version : "1.0.13",
 	setMain : function(main){
@@ -131,12 +130,10 @@ var Monkeyman = {
 		$(element).addClass(className);
 	}
 }
-},{}],2:[function(require,module,exports){
 var MonkeymanGlobals = {
 	GET_CHECKBOX_VALUE : "getCheckboxValue",
 	GO_TO_NEXT_VIEW : "goToNextView"
 }
-},{}],3:[function(require,module,exports){
 function Snippet(config) {
 	this.config = config;
 	this.configuration();
@@ -171,174 +168,8 @@ Snippet.prototype.render = function(_snippet_,data) {
 	});
 	return snippet;
 };
-},{}],4:[function(require,module,exports){
 function inheritPrototype(childObject, parentObject) {
     var copyOfParent = Object.create(parentObject.prototype);
 	copyOfParent.constructor = childObject;
 	childObject.prototype = copyOfParent;
 }
-},{}],5:[function(require,module,exports){
-// package core
-var oop = require('./oop.js');
-var Snippet = require('./Snippet.js');
-var Monkeyman = require('./Monkeyman.js');
-var MonkeymanGlobals = require('./MonkeymanGlobals.js');
-var GenericSnippet = require('./snippets/GenericSnippet.js');
-var GenericNav = require('./snippets/nav/GenericNav.js');
-var Popup = require('./snippets/popup/Popup.js');
-var GenericWidget = require('./widgets/GenericWidget.js');
-var GenericCheckbox = require('./widgets/GenericCheckbox.js');
-var GenericView = require('./views/GenericView.js');
-
-},{"./Monkeyman.js":1,"./MonkeymanGlobals.js":2,"./Snippet.js":3,"./oop.js":4,"./snippets/GenericSnippet.js":6,"./snippets/nav/GenericNav.js":7,"./snippets/popup/Popup.js":8,"./views/GenericView.js":9,"./widgets/GenericCheckbox.js":10,"./widgets/GenericWidget.js":11}],6:[function(require,module,exports){
-function GenericSnippet(config) {
-	this.config = config;
-	this.initializeParameters();
-	this.initialize();
-	this.addHandlers();
-}
-
-GenericSnippet.prototype.constructor = GenericSnippet;
-
-GenericSnippet.prototype.initializeParameters = function() {
-	this.container = this.config.container;
-	this._name = (this.config.name) ? this.config.name : "";
-	this.path = (this.config.path) ? this.config.path : "";
-}
-
-GenericSnippet.prototype.initialize = function() {
-	var snippet = new Snippet( { path : this.path , data : (this.dataSnippet != undefined) ? this.dataSnippet : [] } );
-	this.node = $.parseHTML(snippet.getSnippet());
-	this.container.append(this.node);
-}
-
-GenericSnippet.prototype.addHandlers = function() {}
-
-GenericSnippet.prototype.destroy = function() {
-	$(this.node).remove();
-}
-},{}],7:[function(require,module,exports){
-function GenericNav(config){
-	this.config = config;
-}
-
-GenericNav.prototype.constructor = GenericNav;
-},{}],8:[function(require,module,exports){
-function Popup(config) {
-	GenericSnippet.call(this,config);
-}
-
-inheritPrototype(Popup,GenericSnippet);
-
-Popup.prototype.constructor = Popup;
-
-Popup.prototype.initializeParameters = function() {
-	GenericSnippet.prototype.initializeParameters.call(this);
-}
-
-Popup.prototype.addHandlers = function() {
-	GenericSnippet.prototype.addHandlers.call(this);
-}
-
-Popup.prototype.onClosePopup = function() {}
-},{}],9:[function(require,module,exports){
-function GenericView(config) {
-	this.config = config;
-	this.initializeParameters();
-	this.initialize();
-	this.addHandlers();
-}
-
-GenericView.prototype.constructor = GenericView;
-
-GenericView.prototype.initializeParameters = function() {
-	this.container = this.config.container;
-	this._name = (this.config.name) ? this.config.name : "";
-	this.path = (this.config.path) ? this.config.path : "";
-}
-
-GenericView.prototype.initialize = function() {
-	var snippet = new Snippet( { path : this.path , data : (this.dataSnippet != undefined) ? this.dataSnippet : [] } );
-	this.node = $.parseHTML(snippet.getSnippet());
-	this.container.append(this.node);
-}
-
-GenericView.prototype.addHandlers = function() {}
-
-GenericView.prototype.destroy = function() {
-	$(this.node).remove();
-}
-
-GenericView.prototype.reset = function() { }
-},{}],10:[function(require,module,exports){
-function GenericCheckbox(config){
-	GenericWidget.call(this,config);
-}
-
-inheritPrototype(GenericCheckbox,GenericWidget);
-
-GenericCheckbox.prototype.constructor = GenericCheckbox;
-
-GenericCheckbox.prototype.initializeParameters = function(){
-	GenericWidget.prototype.initializeParameters.call(this);
-}
-
-GenericCheckbox.prototype.initialize = function(){
-	GenericWidget.prototype.initialize.call(this);
-	this.setState(0);
-}
-
-GenericCheckbox.prototype.addHandlers = function(){
-	GenericWidget.prototype.addHandlers.call(this);
-	$(this.node).click({ context:this },this.onClickHandler );
-}
-
-GenericCheckbox.prototype.onClickHandler = function(e){
-	var self = e.data.context;
-	self.state = (self.state==0) ? 1 : 0;
-	self.setState(self.state);
-	$(self).trigger({ type:MonkeymanGlobals.GET_CHECKBOX_VALUE, checkbox:self });
-}
-
-GenericCheckbox.prototype.setState = function(value){
-	this.state = value;
-	if($(this.node).hasClass("disabled")) $(this.node).removeClass("disabled");
-	if($(this.node).hasClass("enabled")) $(this.node).removeClass("enabled");
-	if(this.state == 0){
-		$(this.node).addClass("disabled");
-	} else {
-		$(this.node).addClass("enabled");	
-	}
-}
-
-GenericCheckbox.prototype.getState = function(){
-	return this.state;
-}
-},{}],11:[function(require,module,exports){
-function GenericWidget(config) {
-	this.config = config;
-	this.initializeParameters();
-	this.initialize();
-	this.addHandlers();
-}
-
-GenericWidget.prototype.constructor = GenericWidget;
-
-GenericWidget.prototype.initializeParameters = function() {
-	this.container = this.config.container;
-	this._name = (this.config.name) ? this.config.name : "";
-	this.path = (this.config.path) ? this.config.path : "";
-}
-
-GenericWidget.prototype.initialize = function() {
-	var snippet = new Snippet( { path : this.path , data : (this.dataSnippet != undefined) ? this.dataSnippet : [] } );
-	this.node = $.parseHTML(snippet.getSnippet());
-	this.container.append(this.node);
-}
-
-GenericWidget.prototype.addHandlers = function() {}
-
-GenericWidget.prototype.destroy = function() {
-	$(this.node).remove();
-}
-},{}]},{},[5]);
