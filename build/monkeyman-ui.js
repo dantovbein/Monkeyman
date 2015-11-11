@@ -1,16 +1,3 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-// package ui
-var Slider = require('./ui/slider/src/Slider.js');
-var SliderWithThumbnails = require('./ui/slider/src/SliderWithThumbnails.js');
-var ItemSlider = require('./ui/slider/src/ItemSlider.js');
-var Preloader = require('./ui/preloader/src/Preloader.js');
-var ItemList = require('./ui/list-gallery/src/ItemList.js');
-var ItemPicture = require('./ui/list-gallery/src/ItemPicture.js');
-var ItemShortDescription = require('./ui/list-gallery/src/ItemShortDescription.js');
-var ItemLargeDescription = require('./ui/list-gallery/src/ItemLargeDescription.js');
-var ListGallery = require('./ui/list-gallery/src/ListGallery.js');
-var Toggle = require('./ui/toggle/src/Toggle.js');
-},{"./ui/list-gallery/src/ItemLargeDescription.js":2,"./ui/list-gallery/src/ItemList.js":3,"./ui/list-gallery/src/ItemPicture.js":4,"./ui/list-gallery/src/ItemShortDescription.js":5,"./ui/list-gallery/src/ListGallery.js":6,"./ui/preloader/src/Preloader.js":7,"./ui/slider/src/ItemSlider.js":8,"./ui/slider/src/Slider.js":9,"./ui/slider/src/SliderWithThumbnails.js":10,"./ui/toggle/src/Toggle.js":11}],2:[function(require,module,exports){
 function ItemLargeDescription(config){
 	ItemList.call(this,config);
 	this.pathSnippet = (this.config.pathSnippet) ? this.config.pathSnippet : "../../src/ui/list-gallery/snippets/item-large-description.html";
@@ -30,7 +17,6 @@ ItemLargeDescription.prototype.updateSize = function() {
 		height : this.tempWrapperDataHeight
 	});
 }
-},{}],3:[function(require,module,exports){
 function ItemList(config){
 	this.config = config;
 	this.container = this.config.container;
@@ -58,7 +44,6 @@ ItemList.prototype.updateSize = function() {
 ItemList.prototype.destroy = function() {
 	$(this.node).remove()
 }
-},{}],4:[function(require,module,exports){
 function ItemPicture(config){
 	ItemList.call(this,config);
 	this.pathSnippet = (this.config.pathSnippet) ? this.config.pathSnippet : "../../src/ui/list-gallery/snippets/item-picture.html";
@@ -67,7 +52,6 @@ function ItemPicture(config){
 inheritPrototype(ItemPicture,ItemList);
 
 ItemPicture.prototype.constructor = ItemPicture;
-},{}],5:[function(require,module,exports){
 function ItemShortDescription(config){
 	ItemList.call(this,config);
 	this.pathSnippet = (this.config.pathSnippet) ? this.config.pathSnippet : "../../src/ui/list-gallery/snippets/item-short-description.html";
@@ -87,7 +71,6 @@ ItemShortDescription.prototype.updateSize = function() {
 		height : this.tempWrapperDataHeight
 	});
 }
-},{}],6:[function(require,module,exports){
 function ListGallery(config) {
 	this.config = config;
 	this.container = this.config.container;
@@ -299,7 +282,6 @@ ListGallery.prototype.getAvailableSpace = function() {
 
 
 
-},{}],7:[function(require,module,exports){
 function Preloader(config) {
 	this.config = config;
 	this.container = this.config.container;
@@ -322,7 +304,6 @@ Preloader.prototype.initialize = function() {
 Preloader.prototype.destroy = function() {
 	$(this.node).remove();
 }
-},{}],8:[function(require,module,exports){
 function ItemSlider(config) {
 	this.config = config;
 	this.container = this.config.container;
@@ -338,7 +319,6 @@ ItemSlider.prototype.initialize = function() {
 	this.node = $.parseHTML(snippet.getSnippet());
 	this.container.append(this.node);
 }
-},{}],9:[function(require,module,exports){
 function Slider(config) {
 	this.config = config;
 	this.container = this.config.container;
@@ -447,7 +427,6 @@ Slider.prototype.getThumbPosition = function(){
 Slider.prototype.animate = function() {
 	$(this.node).find(".content-slider-list").animate({ left:this.getThumbPosition() },300,function(){ /*Animation Complete*/ });
 }
-},{}],10:[function(require,module,exports){
 function SliderWithThumbnails(config) {
 	Slider.call(this,config);
 	this.marginThumbnails = (config.marginThumbnails) ? config.marginThumbnails : 0;
@@ -499,7 +478,6 @@ SliderWithThumbnails.prototype.onClickThumbnail = function(event) {
 	event.data.context.current = ($(this).index() > event.data.context.current ) ? -($(this).index()) : Math.abs($(this).index());
 	event.data.context.animate();
 }
-},{}],11:[function(require,module,exports){
 function Toggle(config){
 	this.config = config;
 	this.container = this.config.container;
@@ -541,4 +519,3 @@ Toggle.prototype.showState = function() {
 	$(this.node).removeClass(removeClassName);
 	$(this.node).addClass(addClassName);
 }
-},{}]},{},[1]);

@@ -36,12 +36,18 @@ gulp.task('compile-core',['unify-core','uglify-core']);
 
 
 
-gulp.task('unify-ui',function(){
+/*gulp.task('unify-ui',function(){
 	return browserify('./src/package-ui.js')
 	.bundle()
 	.pipe(source('monkeyman-ui.js'))
 	.pipe(gulp.dest('./build/'))
-})
+});*/
+
+gulp.task('unify-ui', function() {
+  return gulp.src('./src/ui/**/*.js')
+    .pipe(concat('monkeyman-ui.js'))
+    .pipe(gulp.dest('./build/'));
+});
 
 gulp.task('uglify-ui',['unify-ui'],function(){
     return gulp.src('./build/monkeyman-ui.js')
